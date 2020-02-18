@@ -3,3 +3,5 @@ wrappers_env
 .vscode
 .pytest_cache
 non_reg/test_result.txt
+.venv
+.idea
