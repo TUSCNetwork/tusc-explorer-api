@@ -1,6 +1,7 @@
 from websocket import create_connection, WebSocketConnectionClosedException
 import json
 from services.cache import cache
+import logging
 
 class RPCError(Exception):
     pass
@@ -27,7 +28,7 @@ class BitsharesWebsocketClient():
             self._connect()
             return self._safe_request(api, method_name, params)
         except Exception as e:
-            print(e)
+            logging.error(e)
             self.ws.close()
             self._connect()
             return self._safe_request(api, method_name, params)
@@ -44,11 +45,11 @@ class BitsharesWebsocketClient():
             ]
         }
         request_string = json.dumps(payload) 
-        #print('> {}'.format(request_string))
+        logging.debug('> {}'.format(request_string))
         self.ws.send(request_string)
         self.request_id += 1
         reply =  self.ws.recv()
-        #print('< {}'.format(reply))
+        logging.debug('< {}'.format(reply))
 
         ret = {}
         try:

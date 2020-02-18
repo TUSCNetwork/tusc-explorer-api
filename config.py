@@ -1,7 +1,7 @@
 import os
 
 
-WEBSOCKET_URL = os.environ.get('WEBSOCKET_URL', "wss://api.bitshares-kibana.info/ws")
+WEBSOCKET_URL = os.environ.get('WEBSOCKET_URL', "ws://127.0.0.1:8095")
 
 
 # Default connection to Elastic Search.

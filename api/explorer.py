@@ -7,6 +7,7 @@ from services.bitshares_elasticsearch_client import client as bitshares_es_clien
 from services.cache import cache
 from . import es_wrapper
 import config
+import logging
 
 def _bad_request(detail):
     return connexion.problem(400, 'Bad Request', detail)
@@ -44,13 +45,8 @@ def _add_global_informations(response, ws_client):
     current_supply = core_asset["current_supply"]
     confidential_supply = core_asset["confidential_supply"]
     market_cap = int(current_supply) + int(confidential_supply)
-    response["bts_market_cap"] = int(market_cap/100000000)
-
-    if config.TESTNET != 1: # Todo: had to do something else for the testnet
-        btsBtcVolume = ws_client.request('database', 'get_24_volume', ["BTS", "OPEN.BTC"])
-        response["quote_volume"] = btsBtcVolume["quote_volume"]
-    else:
-        response["quote_volume"] = 0
+    # TODO: add market cap based on correct maximum.
+    #response["bts_market_cap"] = int(market_cap/100000000)
 
     global_properties = ws_client.get_global_properties()
     response["committee_count"] = len(global_properties["active_committee_members"])
@@ -426,7 +422,7 @@ def _get_accounts_by_chunks_via_ws(account_ids, chunk_size=1000):
 def _load_missing_accounts_via_ws(account_ids, accounts_already_loaded):
     accounts_ids_already_loaded = [ account['id'] for account in accounts_already_loaded ]
     accounts_ids_to_load = list(set(account_ids) - set(accounts_ids_already_loaded))
-    print("{} accounts to load via websocket".format(len(accounts_ids_to_load)))
+    logging.info("{} accounts to load via websocket".format(len(accounts_ids_to_load)))
     missing_accounts = _get_accounts_by_chunks_via_ws(accounts_ids_to_load)
     return accounts_already_loaded + missing_accounts
 
