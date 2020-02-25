@@ -1,13 +1,13 @@
-# BitShares Explorer REST API
+# TUSC Explorer REST API
 
-BitShares Explorer REST API allows your programs to query the blockchain. 
+TUSC Explorer REST API allows your programs to query the blockchain. 
 
-[https://explorer.bitshares-kibana.info/apidocs/](https://explorer.bitshares-kibana.info/apidocs/)
+[https://elasticsearch.tusc.network/apidocs/](https://elasticsearch.tusc.network/apidocs/)
 
 - [Installation](#installation)
   - [Elasticsearch node](#Elasticsearch-node)
-  - [BitShares node](#BitShares-node)
-  - [Install BitShares Explorer API and dependencies](#Install-BitShares-Explorer-API-and-dependencies)
+  - [TUSC node](#TUSC-node)
+  - [Install TUSC Explorer API and dependencies](#Install-TUSC-Explorer-API-and-dependencies)
 - [Usage](#Usage)
   - [Simple running](#Simple-running)
   - [Nginx and uwsgi](#Nginx-and-uwsgi)
@@ -20,18 +20,16 @@ The following procedure will work in Debian based Linux, more specifically the c
 
 ### Elasticsearch node
 
-Some API calls make use of elasticsearch plugins for Bitshares. This plugins are `elasticsearch` and `es-objects`.
+Some API calls make use of elasticsearch plugins for TUSC. These plugins are `elasticsearch` and `es-objects`.
 
-For elasticsearch installation and usage tutorial please go to: [https://github.com/bitshares/bitshares-core/wiki/ElasticSearch-Plugin](https://github.com/bitshares/bitshares-core/wiki/ElasticSearch-Plugin).
+For elasticsearch installation and usage tutorial please go to:
+ TBA
 
 To avoid installation the API comes with public elasticsearch node that can be updated from config.
 
-### BitShares node
+### TUSC node
 
-This API backend connects to a BitShares `witness_node` to get data. Additionally from elasticsearch API makes use of the following bitshares plugins:
-
-- `market_history`
-- `grouped_orders`
+This API backend connects to a TUSC `witness_node` to get data. 
 
 The node must have `asset_api` and `orders_api` enabled.
 
@@ -51,11 +49,11 @@ The node must have `asset_api` and `orders_api` enabled.
        ]
     }
 
-To install a bitshares node please refer to: https://github.com/bitshares/bitshares-core/blob/master/README.md
+To install a TUSC node please refer to: https://github.com/TUSCNetwork/tusc-core/blob/master/README.md
 
-You can use/change public bitshares API nodes for this by updating the config.
+You can use/change public TUSC API nodes for this by updating the config.
 
-### Install BitShares Explorer API and dependencies
+### Install TUSC Explorer API and dependencies
 
 Install python and pip if you dont have them:
 
@@ -63,8 +61,8 @@ Install python and pip if you dont have them:
 
 Clone the app:
 
-    git clone https://github.com/bitshares/bitshares-explorer-api
-    cd bitshares-explorer-api/
+    git clone https://github.com/TUSCNetwork/tusc-explorer-api.git
+    cd tusc-explorer-api/
 
 Install virtual environment and setup:
 
@@ -137,7 +135,7 @@ Create symbolic link to sites-enabled and restart nginx:
 
 Now api can be started with:
 
-    (wrappers) root@oxarbitrage ~/bitshares/bitshares-explorer-api # uwsgi --ini app.ini
+    (wrappers) root@computer ~/tusc/tusc-explorer-api # uwsgi --ini app.ini
 
 ### Profiler
 

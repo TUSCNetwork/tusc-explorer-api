@@ -6,7 +6,7 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 
 options = {'swagger_url': '/apidocs'}
 # strict_validation=True: requests that include parameters not defined return a 400 error
-app = connexion.App('bitshares-explorer-api', specification_dir='swagger/', options=options)
+app = connexion.App('tusc-explorer-api', specification_dir='swagger/', options=options)
 
 from flask_cors import CORS
 CORS(app.app)

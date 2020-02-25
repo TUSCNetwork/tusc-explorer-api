@@ -56,7 +56,7 @@ paths:
       parameters:
         - in: query
           name: operation_id
-          default: 1.11.0
+          default: 1.8.1931
           type: string
           required: true
           description: Operation ID
@@ -217,7 +217,7 @@ paths:
       parameters:
         - in: query
           name: asset_id
-          default: 'BTS'
+          default: 'TUSC'
           type: string
           required: true
           description: Asset ID
@@ -236,7 +236,7 @@ paths:
       parameters:
         - in: query
           name: asset_id
-          default: 'BTS'
+          default: 'TUSC'
           type: string
           required: true
           description: Asset ID
@@ -267,31 +267,6 @@ paths:
       tags:
         - api
         - block
-  "/ticker":
-    get:
-      description: Get ticker data for a market
-      operationId: api.explorer.get_ticker
-      parameters:
-        - in: query
-          name: base
-          default: USD
-          type: string
-          required: true
-          description: Base asset name or ID
-        - in: query
-          name: quote
-          default: CNY
-          type: string
-          required: true
-          description: Quote asset name or ID
-      responses:
-        '200':
-          description: Ticker data
-        '500':
-          description: Error processing parameters
-      tags:
-        - api
-        - market
   "/object":
     get:
       description: Get object from ID
@@ -318,7 +293,7 @@ paths:
       parameters:
         - in: query
           name: asset_id
-          default: 'BTS'
+          default: 'TUSC'
           type: string
           required: true
           description: Asset ID
@@ -337,7 +312,7 @@ paths:
       parameters:
         - in: query
           name: asset_id
-          default: 'BTS'
+          default: 'TUSC'
           type: string
           required: true
           description: Asset ID
@@ -373,88 +348,6 @@ paths:
       tags:
         - api
         - worker
-  "/markets":
-    get:
-      description: Get all the active markets for an asset.
-      operationId: api.explorer.get_markets
-      parameters:
-        - in: query
-          name: asset_id
-          default: 'BTS'
-          type: string
-          required: true
-          description: Asset ID or name
-      responses:
-        '200':
-          description: Active markets for asset
-        '500':
-          description: Error processing parameters
-      tags:
-        - api
-        - market
-  "/most_active_markets":
-    get:
-      description: Get the most active 100 markets in the network.
-      operationId: api.explorer.get_most_active_markets
-      responses:
-        '200':
-          description: 100 top markets
-        '500':
-          description: Error processing parameters
-      tags:
-        - api
-        - market
-  "/order_book":
-    get:
-      description: Get the order book of a market.
-      operationId: api.explorer.get_order_book
-      parameters:
-        - in: query
-          name: base
-          default: 'BTS'
-          type: string
-          required: true
-          description: Base asset id
-        - in: query
-          name: quote
-          default: 'CNY'
-          type: string
-          required: true
-          description: Quote asset id
-        - in: query
-          name: limit
-          default: 100
-          type: integer
-          required: false
-          description: Number of records to retrieve
-      responses:
-        '200':
-          description: the order book for the market
-        '500':
-          description: Error processing parameters
-      tags:
-        - api
-        - market
-  "/margin_positions":
-    get:
-      description: Get margin positions of an account.
-      operationId: api.explorer.get_margin_positions
-      parameters:
-        - in: query
-          name: account_id
-          default: 1.2.0
-          type: string
-          required: true
-          description: Account id
-      responses:
-        '200':
-          description: open margin positions for account
-        '500':
-          description: Error processing parameters
-      tags:
-        - api
-        - market
-        - account
   "/witnesses":
     get:
       description: Get all witnesses.
@@ -481,43 +374,6 @@ paths:
         - api
         - committee
         - governance
-  "/market_chart_dates":
-    get:
-      description: Utility, get the dates of the last 30 days
-      operationId: api.explorer.get_market_chart_dates
-      responses:
-        '200':
-          description: Array of dates of the last 30 days
-        '500':
-          description: Error processing parameters
-      tags:
-        - api
-        - market
-  "/market_chart_data":
-    get:
-      description: Get OHLC chart data
-      operationId: api.explorer.get_market_chart_data
-      parameters:
-        - in: query
-          name: base
-          default: 'BTS'
-          type: string
-          required: true
-          description: Base asset id
-        - in: query
-          name: quote
-          default: 'CNY'
-          type: string
-          required: true
-          description: Quote asset id
-      responses:
-        '200':
-          description: OHLC data
-        '500':
-          description: Error processing parameters
-      tags:
-        - api
-        - market
   "/top_proxies":
     get:
       description: Get the top proxies
@@ -595,30 +451,6 @@ paths:
       tags:
         - api
         - market
-  "/top_smartcoins":
-    get:
-      description: Top smartcoins
-      operationId: api.explorer.get_top_smartcoins
-      responses:
-        '200':
-          description: Top smartcoins
-        '500':
-          description: Error processing parameters
-      tags:
-        - api
-        - asset
-  "/top_uias":
-    get:
-      description: Top User Issued Assets
-      operationId: api.explorer.get_top_uias
-      responses:
-        '200':
-          description: Top uias
-        '500':
-          description: Error processing parameters
-      tags:
-        - api
-        - asset
   "/lookup_accounts":
     get:
       description: Search account by its name start
@@ -638,25 +470,6 @@ paths:
       tags:
         - api
         - account
-  "/lookup_assets":
-    get:
-      description: Search asset by its name start
-      operationId: api.explorer.lookup_assets
-      parameters:
-        - in: query
-          name: start
-          default: A
-          type: string
-          required: true
-          description: start of the asset name
-      responses:
-        '200':
-          description: Assets matching start
-        '500':
-          description: Error processing parameters
-      tags:
-        - api
-        - asset
   "/last_block_number":
     get:
       description: Get current block number
@@ -681,42 +494,6 @@ paths:
       tags:
         - api
         - operation
-  "/dex_total_volume":
-    get:
-      description: Get some total dex volume figures
-      operationId: api.explorer.get_dex_total_volume
-      responses:
-        '200':
-          description:  dex total volume figures
-        '500':
-          description: Error processing parameters
-      tags:
-        - api
-        - blockchain
-  "/daily_volume_dex_dates":
-    get:
-      description: Get 60 days with of dates
-      operationId: api.explorer.get_daily_volume_dex_dates
-      responses:
-        '200':
-          description:  60 days of dates
-        '500':
-          description: Error processing parameters
-      tags:
-        - api
-        - utility
-  "/daily_volume_dex_data":
-    get:
-      description: Get 60 days of plot volume data
-      operationId: api.explorer.get_daily_volume_dex_data
-      responses:
-        '200':
-          description: 60 days of plot data
-        '500':
-          description: Error processing parameters
-      tags:
-        - api
-        - utility
   "/all_asset_holders":
     get:
       description: Get all holders of an asset
@@ -724,7 +501,7 @@ paths:
       parameters:
         - in: query
           name: asset_id
-          default: USD
+          default: TUSC
           type: string
           required: true
           description: asset id or name
@@ -783,40 +560,3 @@ paths:
         - api
         - account
         - referrer
-  "/grouped_limit_orders":
-    get:
-      description: Get the grouped order for a market
-      operationId: api.explorer.get_grouped_limit_orders
-      parameters:
-        - in: query
-          name: base
-          default: 'BTS'
-          type: string
-          required: true
-          description: base
-        - in: query
-          name: quote
-          default: 'CNY'
-          type: string
-          required: true
-          description: page
-        - in: query
-          name: group
-          default: 10
-          type: integer
-          required: false
-          description: group
-        - in: query
-          name: limit
-          default: 10
-          type: integer
-          required: false
-          description: limit
-      responses:
-        '200':
-          description: Grouped order limit book for a market
-        '500':
-          description: Error processing parameters
-      tags:
-        - api
-        - market
