@@ -9,7 +9,7 @@ stages:
       status_code: 200
       body:
         accounts_registered_this_interval: !anyint
-        bts_market_cap: !anyint
+        tusc_market_cap: !anyint
         commitee_count: !anyint
         current_aslot: !anyint
         current_witness: !anystr
@@ -72,7 +72,7 @@ stages:
         accounts_registered_this_interval: !anyint
         block_num: !anyint
         block_time: !anystr
-        bts_market_cap: !anyint
+        tusc_market_cap: !anyint
         commitee_count: !anyint
         op:
           balance_owner_key: !anystr
@@ -231,7 +231,7 @@ stages:
       url: "{host}/asset"
       method: GET
       params:
-        asset_id: BTS
+        asset_id: TUSC
     response:
       status_code: 200
       body:
@@ -249,7 +249,7 @@ stages:
       url: "{host}/asset_and_volume"
       method: GET
       params:
-        asset_id: BTS
+        asset_id: TUSC
     response:
       status_code: 200
       body:
@@ -281,29 +281,7 @@ stages:
         transactions: !anything
         witness: !anystr
         witness_signature: !anystr
----
-test_name: Retrieve /ticker
-stages:
-  - name: Make sure we have the right content
-    request:
-      url: "{host}/ticker"
-      method: GET
-      params:
-        base: USD
-        quote: CNY
-    response:
-      status_code: 200
-      body:
-        base: "USD"
-        base_volume: !anystr
-        highest_bid: !anystr
-        latest: !anystr
-        lowest_ask: !anystr
-        percent_change: !anystr
-        quote: "CNY"
-        quote_volume: !anystr
-        time: !anystr
----
+
 test_name: Retrieve /object
 stages:
   - name: Make sure we have the right content
@@ -328,7 +306,7 @@ stages:
       url: "{host}/asset_holders_count"
       method: GET
       params:
-        asset_id: BTS
+        asset_id: TUSC
     response:
       status_code: 200
       body:
@@ -344,7 +322,7 @@ stages:
       url: "{host}/asset_holders"
       method: GET
       params:
-        asset_id: BTS
+        asset_id: TUSC
         start: 0
         limit: 20
     response:
@@ -392,7 +370,7 @@ stages:
       url: "{host}/markets"
       method: GET
       params:
-        asset_id: BTS
+        asset_id: TUSC
     response:
       status_code: 200
       body:
@@ -405,30 +383,6 @@ stages:
               pair: !anystr
               base_id: !anystr
               quote_id: !anystr
----
-test_name: Retrieve /order_book
-stages:
-  - name: Make sure we have the right content
-    request:
-      url: "{host}/order_book"
-      method: GET
-      params:
-        base: BTS
-        quote: CNY
-        limit: 1
-    response:
-      status_code: 200
-      body:
-        asks: 
-          - base: !anystr
-            price: !anystr
-            quote: !anystr
-        bids:
-          - base: !anystr
-            price: !anystr
-            quote: !anystr
-        base: BTS
-        quote: CNY
 ---
 test_name: Retrieve /margin_positions
 stages:
@@ -515,27 +469,6 @@ stages:
           extra_kwargs:
             element_desc: !anystr
 ---
-test_name: Retrieve /market_chart_data
-stages:
-  - name: Make sure we have the right content
-    request:
-      url: "{host}/market_chart_data"
-      method: GET
-      params:
-        base: BTS
-        quote: CNY
-    response:
-      status_code: 200
-      body:
-        $ext:
-          function: tests.util:validate_list_of
-          extra_kwargs:
-            element_desc: 
-              - !anyfloat
-              - !anyfloat
-              - !anyfloat
-              - !anyfloat
----
 test_name: Retrieve /top_proxies
 stages:
   - name: Make sure we have the right content
@@ -551,9 +484,9 @@ stages:
             element_desc: 
               id: !anystr
               name: !anystr
-              bts_weight: !anyint
+              tusc_weight: !anyint
               followers: !anyint
-              bts_weight_percentage: !anyfloat
+              tusc_weight_percentage: !anyfloat
 ---
 test_name: Retrieve /top_holders
 stages:
@@ -769,40 +702,8 @@ stages:
     response:
       status_code: 200
       body:
-        market_cap_bts: !anyfloat
-        market_cap_cny: !anyfloat
-        market_cap_usd: !anyfloat
-        volume_bts: !anyfloat
-        volume_usd: !anyfloat
-        volume_cny: !anyfloat
----
-test_name: Retrieve /daily_volume_dex_dates
-stages:
-  - name: Make sure we have the right content
-    request:
-      url: "{host}/daily_volume_dex_dates"
-      method: GET
-    response:
-      status_code: 200
-      body:
-        $ext:
-          function: tests.util:validate_list_of
-          extra_kwargs:
-            element_desc: !anystr
----
-test_name: Retrieve /daily_volume_dex_data
-stages:
-  - name: Make sure we have the right content
-    request:
-      url: "{host}/daily_volume_dex_data"
-      method: GET
-    response:
-      status_code: 200
-      body:
-        $ext:
-          function: tests.util:validate_list_of
-          extra_kwargs:
-            element_desc: !anyint
+        market_cap_tusc: !anyfloat
+        volume_tusc: !anyfloat
 ---
 test_name: Retrieve /all_asset_holders
 stages:
@@ -811,7 +712,7 @@ stages:
       url: "{host}/all_asset_holders"
       method: GET
       params:
-        asset_id: USD
+        asset_id: TUSC
     response:
       status_code: 200
       body:
@@ -861,33 +762,3 @@ stages:
               referrer_rewards_percentage: !anyint
               lifetime_referrer: !anystr
               lifetime_referrer_fee_percentage: !anyint
----
-test_name: Retrieve /grouped_limit_orders
-stages:
-  - name: Make sure we have the right content
-    request:
-      url: "{host}/grouped_limit_orders"
-      method: GET
-      params:
-        base: BTS
-        quote: CNY
-        group: 10
-        limit: 1
-    response:
-      status_code: 200
-      body:
-        - max_price:
-            base:
-              amount: !anything
-              asset_id: !anystr
-            quote:
-              amount: !anything
-              asset_id: !anystr
-          min_price:
-            base:
-              amount: !anything
-              asset_id: !anystr
-            quote:
-              amount: !anything
-              asset_id: !anystr
-          total_for_sale: !anything              

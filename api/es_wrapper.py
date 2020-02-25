@@ -1,7 +1,7 @@
 from .utils import needs_es, verify_es_response
 
 from elasticsearch_dsl import Search, Q
-from services.bitshares_elasticsearch_client import es
+from services.tusc_elasticsearch_client import es
 from datetime import datetime, timedelta
 from services.cache import cache
 

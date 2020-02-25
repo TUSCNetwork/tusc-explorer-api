@@ -1,15 +1,14 @@
 import os
 
 
-WEBSOCKET_URL = os.environ.get('WEBSOCKET_URL', "wss://api.bitshares-kibana.info/ws")
+WEBSOCKET_URL = os.environ.get('WEBSOCKET_URL', "ws://127.0.0.1:8095")
 
 
 # Default connection to Elastic Search.
 ELASTICSEARCH = {
-     #'hosts': os.environ.get('ELASTICSEARCH_URL', 'https://elasticsearch.bitshares-kibana.info/').split(','),
-     'hosts': os.environ.get('ELASTICSEARCH_URL', 'https://BitShares:Infrastructure@eu.elasticsearch.bitshares.ws:443').split(','),
-     'user': os.environ.get('ELASTICSEARCH_USER', 'BitShares'),
-     'password': os.environ.get('ELASTICSEARCH_PASS', 'Infrastructure')
+     'hosts': os.environ.get('ELASTICSEARCH_URL', 'http://localhost:9200').split(','),
+     'user': os.environ.get('ELASTICSEARCH_USER', 'TUSC'),
+     'password': os.environ.get('ELASTICSEARCH_PASS', 'CSUT')
 }
 
 
@@ -33,8 +32,7 @@ ELASTICSEARCH_ADDITIONAL = {
     'operations': None,
     # Overwrite cluster to use to retrieve bitshares-* index.
     'objects': {
-        #'hosts': ['https://elasticsearch.bitshares-kibana.info/'] # oxarbitrage (no credentials)
-        'hosts': ['https://BitShares:Infrastructure@eu.elasticsearch.bitshares.ws:443'] # infra
+        'hosts': ['http://localhost:9200'] # infra
     }
 
 }
@@ -52,7 +50,7 @@ PROFILER = {
     'password': os.environ.get('PROFILER_PASSWORD', None),
 }
 
-CORE_ASSET_SYMBOL = 'BTS'
+CORE_ASSET_SYMBOL = 'TUSC'
 CORE_ASSET_ID = '1.3.0'
 
 TESTNET = 0 # 0 = not in the testnet, 1 = testnet

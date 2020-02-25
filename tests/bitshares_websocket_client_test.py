@@ -1,6 +1,6 @@
 import pytest
 
-from services.bitshares_websocket_client import BitsharesWebsocketClient
+from services.tusc_websocket_client import BitsharesWebsocketClient
 import config
 
 @pytest.fixture
