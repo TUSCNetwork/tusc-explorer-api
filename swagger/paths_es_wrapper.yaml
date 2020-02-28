@@ -15,7 +15,7 @@ paths:
           type: integer
           required: false
           default: -1
-          description: 1-44 Operation type
+          description: 1-36 Operation type
         - in: query
           name: from_
           default: 0

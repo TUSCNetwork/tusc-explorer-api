@@ -179,7 +179,8 @@ paths:
         - blockchain
   "/account_history":
     get:
-      description: Get history of account by pages
+      description: Get history of account by pages. *You are better off using the /es/account_history endpoint as it
+      provides more features*
       operationId: api.explorer.get_account_history
       deprecated: true
       parameters:
