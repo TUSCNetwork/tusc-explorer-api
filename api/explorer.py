@@ -707,7 +707,7 @@ OPERATION_TYPES = [
             { 'id': 33, 'name': 'htlc_redeemed', 'virtual': True },
             { 'id': 34, 'name': 'htlc_extend', 'virtual': False },
             { 'id': 35, 'name': 'htlc_refund', 'virtual': True },
-            {'id': 35, 'name': 'sale', 'virtual': False}
+            { 'id': 36, 'name': 'sale', 'virtual': False}
 
 ]
 

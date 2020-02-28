@@ -1,7 +1,7 @@
 from elasticsearch_dsl import connections, Search, Q, A
 import config
 
-class BitsharesElasticSearchClient():
+class TUSCElasticSearchClient():
     def __init__(self, default_cluster_config, additional_clusters_config):
         self._create_connection('operations', default_cluster_config, additional_clusters_config)
         self._create_connection('objects', default_cluster_config, additional_clusters_config)
@@ -179,7 +179,7 @@ class BitsharesElasticSearchClient():
 
 
 
-client = BitsharesElasticSearchClient(config.ELASTICSEARCH, config.ELASTICSEARCH_ADDITIONAL)
+client = TUSCElasticSearchClient(config.ELASTICSEARCH, config.ELASTICSEARCH_ADDITIONAL)
 es = connections.get_connection(alias='operations')
 
 if __name__ == "__main__":

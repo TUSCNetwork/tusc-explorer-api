@@ -1,7 +1,7 @@
 paths:
   "/es/account_history":
     get:
-      description: Get all operations in history with pager, similar to bitshares node call but with fullter features like search by date, filter by operation and others.
+      description: Get all operations in history with pager, similar to TUSC node call but with fuller features like search by date, filter by operation and others.
       operationId: api.es_wrapper.get_account_history
       parameters:
         - in: query

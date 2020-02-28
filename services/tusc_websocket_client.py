@@ -6,7 +6,7 @@ import logging
 class RPCError(Exception):
     pass
 
-class BitsharesWebsocketClient():
+class TUSCWebsocketClient():
     def __init__(self, websocket_url):
         self.url = websocket_url
         self._connect()
@@ -80,4 +80,4 @@ class BitsharesWebsocketClient():
         return self.request('database', 'get_global_properties', [])
 
 import config
-client = BitsharesWebsocketClient(config.WEBSOCKET_URL)
+client = TUSCWebsocketClient(config.WEBSOCKET_URL)

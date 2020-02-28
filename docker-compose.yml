@@ -12,7 +12,7 @@ volumes:
 services:
   web:
     hostname: api
-    image: bitshares-explorer
+    image: tusc-explorer
     build: .
     command: uwsgi --ini docker.ini
     depends_on:
