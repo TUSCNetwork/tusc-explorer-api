@@ -228,7 +228,7 @@ def get_asset_holders(asset_id, start=0, limit=20):
 # Added by rabTAI
 
 
-def get_max_supply(object):
+def get_total_supply(object):
     maxSupply = tusc_ws_client.get_object(object)
     return maxSupply['current_max_supply']
 

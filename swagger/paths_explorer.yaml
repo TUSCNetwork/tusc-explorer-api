@@ -515,10 +515,10 @@ paths:
         - asset
         - holder
   # Added by rabTAI
-  "/max_supply":
+  "/total_supply":
     get:
-      description: Get TUSC max supply
-      operationId: api.explorer.get_max_supply
+      description: Get total coin supply
+      operationId: api.explorer.get_total_supply
       parameters:
         - in: query
           name: object
@@ -528,7 +528,7 @@ paths:
           description: Object ID
       responses:
         '200':
-          description: Get max supply of Object
+          description: Get total coin supply
         '500':
           description: Error processing parameters
       tags:
