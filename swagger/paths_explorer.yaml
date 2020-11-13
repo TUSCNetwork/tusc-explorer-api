@@ -514,6 +514,26 @@ paths:
         - api
         - asset
         - holder
+  # Added by rabTAI
+  "/total_supply":
+    get:
+      description: Get total coin supply
+      operationId: api.explorer.get_total_supply
+      parameters:
+        - in: query
+          name: object
+          default: 2.3.0
+          type: string
+          required: true
+          description: Object ID
+      responses:
+        '200':
+          description: Get total coin supply
+        '500':
+          description: Error processing parameters
+      tags:
+        - api
+        - object
   "/referrer_count":
     get:
       description: Get number of referrers an account made

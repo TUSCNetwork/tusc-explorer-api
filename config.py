@@ -3,12 +3,14 @@ import os
 
 WEBSOCKET_URL = os.environ.get('WEBSOCKET_URL', "ws://127.0.0.1:8095")
 
+# If local node is not running, remote TUSC node could be used
+#WEBSOCKET_URL = os.environ.get('WEBSOCKET_URL', "wss://tuscapi.gambitweb.com")
 
 # Default connection to Elastic Search.
 ELASTICSEARCH = {
-     'hosts': os.environ.get('ELASTICSEARCH_URL', 'http://localhost:9200').split(','),
-     'user': os.environ.get('ELASTICSEARCH_USER', 'TUSC'),
-     'password': os.environ.get('ELASTICSEARCH_PASS', 'CSUT')
+    'hosts': os.environ.get('ELASTICSEARCH_URL', 'http://localhost:9200').split(','),
+    'user': os.environ.get('ELASTICSEARCH_USER', 'TUSC'),
+    'password': os.environ.get('ELASTICSEARCH_PASS', 'CSUT')
 }
 
 
@@ -32,15 +34,17 @@ ELASTICSEARCH_ADDITIONAL = {
     'operations': None,
     # Overwrite cluster to use to retrieve bitshares-* index.
     'objects': {
-        'hosts': ['http://localhost:9200'] # infra
+        'hosts': ['http://localhost:9200']  # infra
     }
 
 }
 
 # Cache: see https://flask-caching.readthedocs.io/en/latest/#configuring-flask-caching
 CACHE = {
-    'CACHE_TYPE': os.environ.get('CACHE_TYPE', 'simple'), # use 'uwsgi' when running under uWSGI server.
-    'CACHE_DEFAULT_TIMEOUT': int(os.environ.get('CACHE_DEFAULT_TIMEOUT', 600)) # 10 min
+    # use 'uwsgi' when running under uWSGI server.
+    'CACHE_TYPE': os.environ.get('CACHE_TYPE', 'simple'),
+    # 10 min
+    'CACHE_DEFAULT_TIMEOUT': int(os.environ.get('CACHE_DEFAULT_TIMEOUT', 600))
 }
 
 # Configure profiler: see https://github.com/muatik/flask-profiler
@@ -53,7 +57,7 @@ PROFILER = {
 CORE_ASSET_SYMBOL = 'TUSC'
 CORE_ASSET_ID = '1.3.0'
 
-TESTNET = 0 # 0 = not in the testnet, 1 = testnet
+TESTNET = 0  # 0 = not in the testnet, 1 = testnet
 CORE_ASSET_SYMBOL_TESTNET = 'TEST'
 
 # Choose which APIs to expose, default to all.
