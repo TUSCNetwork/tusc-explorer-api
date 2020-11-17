@@ -1,10 +1,10 @@
 import os
 
 
-WEBSOCKET_URL = os.environ.get('WEBSOCKET_URL', "ws://127.0.0.1:8095")
+#WEBSOCKET_URL = os.environ.get('WEBSOCKET_URL', "ws://127.0.0.1:8095")
 
 # If local node is not running, remote TUSC node could be used
-#WEBSOCKET_URL = os.environ.get('WEBSOCKET_URL', "wss://tuscapi.gambitweb.com")
+WEBSOCKET_URL = os.environ.get('WEBSOCKET_URL', "wss://tuscapi.gambitweb.com")
 
 # Default connection to Elastic Search.
 ELASTICSEARCH = {

@@ -54,7 +54,7 @@ def _add_global_informations(response, ws_client):
     confidential_supply = core_asset["confidential_supply"]
     market_cap = int(current_supply) + int(confidential_supply)
     # TODO: add market cap based on correct maximum.
-    #response["bts_market_cap"] = int(market_cap/100000000)
+    # response["bts_market_cap"] = int(market_cap/100000000)
 
     global_properties = ws_client.get_global_properties()
     response["committee_count"] = len(
@@ -226,17 +226,31 @@ def get_asset_holders(asset_id, start=0, limit=20):
     return asset_holders
 
 # Added by rabTAI
+# Function to format the output of the TUSC value
+
+# This function will receive string value, it will remove " ",
+# and divide the nubmer by 100000 to convert it to TUSC decimal value
+
+
+def returnNumericValue(tuscValue):
+    # Convert to integer
+    numericValue = int(tuscValue)
+    # Divide it by 100000 to convert to TUSC decimal value
+    numericValue = numericValue/100000
+    return numericValue
 
 
 def get_total_supply(object):
-    maxSupply = tusc_ws_client.get_object(object)
-    return maxSupply['current_max_supply']
+    totalSupply = tusc_ws_client.get_object(object)
+    # Convert to numeric value (call a function)
+    totalSupply = returnNumericValue(totalSupply['current_max_supply'])
+    return totalSupply
 
 
 def get_workers():
     workers_count = tusc_ws_client.request('database', 'get_worker_count', [])
     workers = tusc_ws_client.request('database', 'get_objects', [
-                                     ['1.11.{}'.format(i) for i in range(0, workers_count)]])
+        ['1.11.{}'.format(i) for i in range(0, workers_count)]])
 
     result = []
     for worker in workers:
@@ -253,7 +267,7 @@ def _is_object(string):
     return len(string.split(".")) == 3
 
 
-@cache.memoize()
+@ cache.memoize()
 def _get_markets(asset_id):
     markets = tusc_es_client.get_markets('now-1d', 'now', quote=asset_id)
 
@@ -280,7 +294,7 @@ def get_markets(asset_id):
     return _get_markets(asset_id)
 
 
-@cache.memoize()
+@ cache.memoize()
 def get_most_active_markets():
     markets = tusc_es_client.get_markets('now-1d', 'now')
 
