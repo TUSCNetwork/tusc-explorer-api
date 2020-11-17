@@ -239,12 +239,23 @@ def returnNumericValue(tuscValue):
     numericValue = numericValue/100000
     return numericValue
 
+# Returns Total Supply
+
 
 def get_total_supply(object):
     totalSupply = tusc_ws_client.get_object(object)
     # Convert to numeric value (call a function)
     totalSupply = returnNumericValue(totalSupply['current_max_supply'])
     return totalSupply
+
+# Returns Circulating Supply
+
+
+def get_circulating_supply(object):
+    circulatingSupply = tusc_ws_client.get_object(object)
+    # Convert to numeric value (call a function)
+    circulatingSupply = returnNumericValue(circulatingSupply['current_supply'])
+    return circulatingSupply
 
 
 def get_workers():
